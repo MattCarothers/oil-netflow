@@ -151,6 +151,18 @@ sub extract_ips
 	return %ips;
 }
 
+# Sort nfcapd files by date.  E.g. when comparing ...
+#
+# /netflow/router1/nfcapd.201810191015 
+#                ^        ^^^^^^^^^^^^
+#
+# ... to ...
+#
+# /netflow/router2/nfcapd.201810181010 
+#                ^        ^^^^^^^^^^^^
+#
+# ... use 201810181010 and 201810191015 as the sorting keys to avoid putting a
+# newer file first due to the router name being alphabetically lower.
 sub cap_file_sort
 {
 	my ($a, $b) = @_;
